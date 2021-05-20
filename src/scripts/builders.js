@@ -1,4 +1,6 @@
-const topDiv = () => {
+import Task from './taskClass';
+
+const top = () => {
   const wrapper = document.createElement('div');
   const h1 = document.createElement('h1');
 
@@ -10,16 +12,16 @@ const topDiv = () => {
   return wrapper;
 };
 
-const containerDiv = () => {
+const container = () => {
   const wrapper = document.createElement('div');
   wrapper.classList.add('container');
   return wrapper;
 };
 
-const navigationSection = () => {
+const navigation = () => {
   const nav = document.createElement('nav');
   const h2 = document.createElement('h2');
-  const tasksContainer = document.createElement('p');
+  const tasksContainer = document.createElement('div');
   const addProjectButton = document.createElement('button');
 
   h2.textContent = 'Projects';
@@ -27,8 +29,8 @@ const navigationSection = () => {
   tasksContainer.id = 'task-list';
   tasksContainer.classList.add('mt-5');
 
-  addProjectButton.textContent = 'Create Task';
-  addProjectButton.id = 'createTask';
+  addProjectButton.textContent = 'Create Project';
+  addProjectButton.id = 'createProject';
   addProjectButton.classList.add('button', 'button-info', 'is-small', 'mt-5');
 
   nav.append(h2, tasksContainer, addProjectButton);
@@ -36,7 +38,7 @@ const navigationSection = () => {
   return nav;
 };
 
-const mainSection = () => {
+const main = () => {
   const main = document.createElement('main');
   const h2 = document.createElement('h2');
   const tableWrapper = document.createElement('div');
@@ -63,6 +65,7 @@ const mainSection = () => {
   thDelete.textContent = 'Delete';
 
   addNew.classList.add('button', 'is-primary', 'is-small', 'has-text-dark');
+  addNew.id = 'createTask';
   addNew.textContent = 'Create New Task';
 
   tr.append(thCheckBox, thTitle, thDate, thDelete);
@@ -88,7 +91,7 @@ const form = () => {
   const op2 = document.createElement('option');
   const op3 = document.createElement('option');
   const br = document.createElement('br');
-  const submit = document.createElement('button');
+  const submit = document.createElement('a');
 
   form.id = 'form';
   form.classList.add('mt-5', 'box');
@@ -123,7 +126,6 @@ const form = () => {
   op3.setAttribute('value', 'high');
   op3.textContent = 'High';
 
-  submit.setAttribute('type', 'submit');
   submit.classList.add('button', 'is-primary', 'is-small', 'has-text-dark', 'mt-5');
   submit.id = 'addTask';
   submit.textContent = 'Add Task';
@@ -140,4 +142,40 @@ const form = () => {
   return form;
 };
 
-export { topDiv, containerDiv, navigationSection, mainSection, form };
+const fullPage = () => {
+  const content = document.querySelector('#content');
+  const containerDiv = container();
+
+  containerDiv.append(navigation(), main());
+  content.append(top(), containerDiv);
+
+  return content;
+};
+
+const project = (project, projectsArray) => {
+  const link = document.createElement('a');
+  const linkContainer = document.createElement('p');
+
+  link.textContent = project.title;
+  link.href = '#';
+  linkContainer.setAttribute('data-index', projectsArray.indexOf(project));
+  linkContainer.appendChild(link);
+  return linkContainer;
+};
+
+const task = (project) => {
+  const title = document.querySelector('#title');
+  const description = document.quesrySelector('#description');
+  const date = document.quesrySelector('#date');
+  const priority = document.quesrySelector('#priority');
+
+  if (title.value !== '' && description.value !== '') {
+    const task = new Task(title.value, date.value, description.value, priority.value);
+    project.addTask(task);
+  }
+  return task;
+};
+
+export {
+  top, container, navigation, main, form, fullPage, project, task,
+};
