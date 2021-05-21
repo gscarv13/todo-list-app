@@ -53,7 +53,22 @@ const displayAllTasks = (project) => {
   }
 };
 
+const deleteAll = (container) => {
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+};
+
+const updateTasks = (e, array) => {
+  const index = e.target.parentElement.getAttribute('data-index');
+  const container = document.querySelector('#tasksContainer');
+
+  deleteAll(container);
+  displayAllTasks(array[index]);
+};
+
 export {
   displayTaskForm, hideTaskForm, displayProjects, displayTask,
   displayAllTasks, displayProjectForm, hideProjectForm,
+  deleteAll, updateTasks,
 };

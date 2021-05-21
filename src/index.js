@@ -12,6 +12,15 @@ const projectsArray = [];
 // build the initial HTML
 Builder.fullPage();
 projectsArray.push(new Project('Default'));
+projectsArray.push(new Project('TeSTESSSS'));
+
+for (let i = 0; i < 10; i += 1) {
+  projectsArray[0].addTask(new Task('title', 'description', 'duedate', 'priority'));
+}
+
+for (let i = 0; i < 10; i += 1) {
+  projectsArray[1].addTask(new Task(`${i}+askduhaks`, 'description', 'duedate', 'priority'));
+}
 
 View.displayProjects(projectsArray);
 
@@ -20,8 +29,10 @@ const createNewTaskButton = document.querySelector('#createTask');
 const addNewTaskButton = document.querySelector('main');
 const createNewProjectButton = document.querySelector('#createProject');
 const addNewProjectButton = document.querySelector('nav');
+const projectListListener = document.querySelector('#projectsList');
 
 createNewTaskButton.addEventListener('click', View.displayTaskForm);
 addNewTaskButton.addEventListener('click', View.hideTaskForm);
 createNewProjectButton.addEventListener('click', View.displayProjectForm);
 addNewProjectButton.addEventListener('click', View.hideProjectForm);
+projectListListener.addEventListener('click', (e) => View.updateTasks(e, projectsArray));
