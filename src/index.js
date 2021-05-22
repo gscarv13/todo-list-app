@@ -5,6 +5,7 @@ import Project from './scripts/projectClass';
 
 import * as Builder from './scripts/builders';
 import * as View from './scripts/views';
+import * as Helper from './scripts/helpers';
 
 // variables
 const projectsArray = [];
@@ -31,8 +32,8 @@ const createNewProjectButton = document.querySelector('#createProject');
 const addNewProjectButton = document.querySelector('nav');
 const projectListListener = document.querySelector('#projectsList');
 
-createNewTaskButton.addEventListener('click', View.displayTaskForm);
-addNewTaskButton.addEventListener('click', View.hideTaskForm);
-createNewProjectButton.addEventListener('click', View.displayProjectForm);
-addNewProjectButton.addEventListener('click', View.hideProjectForm);
+createNewTaskButton.addEventListener('click', () => View.displayForm('formContainer', 'form', Builder.form));
+addNewTaskButton.addEventListener('click', (e) => View.hideForm(e, 'addTask', 'form'));
+createNewProjectButton.addEventListener('click', () => View.displayForm('projectFormContainer', 'projectForm', Builder.projectForm));
+addNewProjectButton.addEventListener('click', (e) => Helper.addNewProject(e, projectsArray));
 projectListListener.addEventListener('click', (e) => View.updateTasks(e, projectsArray));
