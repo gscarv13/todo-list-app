@@ -1,35 +1,18 @@
 import * as Builder from './builders';
 
-const displayTaskForm = () => {
-  const container = document.querySelector('#formContainer');
+const displayForm = (parentElementID, currentElementID, builder) => {
+  const container = document.querySelector(`#${parentElementID}`);
 
-  if (document.querySelector('#form') === null) {
-    const form = Builder.form();
+  if (document.querySelector(`#${currentElementID}`) === null) {
+    const form = builder();
     container.append(form);
   }
   return container;
 };
 
-const hideTaskForm = (e) => {
-  if (e.target.id === 'addTask') {
-    const form = document.querySelector('#form');
-    form.remove();
-  }
-};
-
-const displayProjectForm = () => {
-  const container = document.querySelector('#projectFormContainer');
-
-  if (document.querySelector('#projectForm') === null) {
-    const form = Builder.projectForm();
-    container.append(form);
-  }
-  return container;
-};
-
-const hideProjectForm = (e) => {
-  if (e.target.id === 'addProject') {
-    const form = document.querySelector('#projectForm');
+const hideForm = (e, buttonID, formID) => {
+  if (e.target.id === buttonID) {
+    const form = document.querySelector(`#${formID}`);
     form.remove();
   }
 };
@@ -59,6 +42,12 @@ const deleteAll = (container) => {
   }
 };
 
+const reload = (container, items, builder) => {
+  for (let i = 0; i < items.length; i += 1) {
+    container.append(builder(items[i], items));
+  }
+};
+
 const updateTasks = (e, array) => {
   const index = e.target.parentElement.getAttribute('data-index');
   const container = document.querySelector('#tasksContainer');
@@ -68,7 +57,6 @@ const updateTasks = (e, array) => {
 };
 
 export {
-  displayTaskForm, hideTaskForm, displayProjects, displayTask,
-  displayAllTasks, displayProjectForm, hideProjectForm,
-  deleteAll, updateTasks,
+  displayForm, hideForm, displayProjects, displayTask,
+  displayAllTasks, deleteAll, updateTasks, reload,
 };
