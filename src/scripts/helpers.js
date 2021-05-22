@@ -1,5 +1,7 @@
 import Task from './taskClass';
 import Project from './projectClass';
+import * as View from './views';
+import * as Builder from './builders';
 
 const taskCreator = () => {
   const title = document.querySelector('#title');
@@ -16,11 +18,19 @@ const taskCreator = () => {
 
 const projectCreator = () => {
   const title = document.querySelector('#projectTitle');
-  let project = null;
-
-  if (title.value !== '') {
-    project = new Project(title.value);
-  }
-
-  return project;
+  return new Project(title.value);
 };
+
+const addNewProject = (e, projectsArray) => {
+  const titleField = document.querySelector('#projectTitle').value;
+  if (e.target.id === 'addProject' && titleField !== '') {
+    const project = projectCreator();
+    const container = document.querySelector('#projectsList');
+    projectsArray.push(project);
+    View.deleteAll(container);
+    View.reload(container, projectsArray, Builder.projectLink);
+    View.hideForm(e, 'addProject', 'projectForm');
+  }
+};
+
+export { taskCreator, projectCreator, addNewProject };
