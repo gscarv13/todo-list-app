@@ -5,11 +5,10 @@ export default class Project {
   }
 
   addTask(task) {
-    return this.taskList.push(task);
+    this.taskList.push(task);
   }
 
-  removeTask(task) {
-    const taskIndex = Number(this.taskList.indexOf(task));
-    return this.taskList.splice(taskIndex, 1);
+  removeTask(taskIndex) {
+    this.taskList.splice(taskIndex, 1);
   }
 }

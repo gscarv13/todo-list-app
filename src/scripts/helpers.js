@@ -22,8 +22,8 @@ const projectCreator = () => {
 };
 
 const addNewProject = (e, projectsArray) => {
-  const titleField = document.querySelector('#projectTitle').value;
-  if (e.target.id === 'addProject' && titleField !== '') {
+  const titleField = document.querySelector('#projectTitle');
+  if (e.target.id === 'addProject' && titleField.value !== '') {
     const project = projectCreator();
     const container = document.querySelector('#projectsList');
     projectsArray.push(project);
@@ -50,4 +50,16 @@ const addNewTask = (e, projectsArray) => {
   }
 };
 
-export { addNewProject, addNewTask };
+const deleteTask = (e, projectsArray) => {
+  if (e.target.textContent === 'Delete') {
+    const taskIndex = e.target.parentElement.parentElement.getAttribute('data-attribute');
+    const tasksContainer = document.querySelector('#tasksContainer');
+    const projectIndex = JSON.parse(localStorage.getItem('projectIndex'));
+    const project = projectsArray[projectIndex];
+    project.removeTask(taskIndex);
+    View.deleteAll(tasksContainer);
+    View.displayAllTasks(project);
+  }
+};
+
+export { addNewProject, addNewTask, deleteTask };
