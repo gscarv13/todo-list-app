@@ -5,7 +5,7 @@ import * as Builder from './builders';
 
 const taskCreator = () => {
   const title = document.querySelector('#title');
-  const description = document.queryCommandValue('#description');
+  const description = document.querySelector('#description');
   const dueDate = document.querySelector('#date');
   const priority = document.querySelector('#priority');
   let task = null;
@@ -33,4 +33,21 @@ const addNewProject = (e, projectsArray) => {
   }
 };
 
-export { taskCreator, projectCreator, addNewProject };
+const addNewTask = (e, projectsArray) => {
+  const title = document.querySelector('#title');
+  const description = document.querySelector('#description');
+  const date = document.querySelector('#date');
+
+  if (e.target.id === 'addTask' && title.value !== '' && description.value !== '' && date.value !== '') {
+    const task = taskCreator();
+    const container = document.querySelector('#tasksContainer');
+    const index = JSON.parse(localStorage.getItem('projectIndex'));
+    const project = projectsArray[index];
+    project.addTask(task);
+    View.deleteAll(container);
+    View.displayAllTasks(project);
+    View.hideForm(e, 'addTask', 'form');
+  }
+};
+
+export { addNewProject, addNewTask };
