@@ -13,16 +13,9 @@ const projectsArray = [];
 // build the initial HTML
 Builder.fullPage();
 projectsArray.push(new Project('Default'));
-projectsArray.push(new Project('TeSTESSSS'));
 
-for (let i = 0; i < 10; i += 1) {
-  projectsArray[0].addTask(new Task('title', 'description', 'duedate', 'priority'));
-}
-
-for (let i = 0; i < 10; i += 1) {
-  projectsArray[1].addTask(new Task(`${i}+askduhaks`, 'description', 'duedate', 'priority'));
-}
-
+projectsArray[0].addTask(new Task('Take out trash', '', '31/12/2030', 'Low'));
+View.displayAllTasks(projectsArray[0]);
 View.displayProjects(projectsArray);
 
 // Listeners
@@ -31,9 +24,12 @@ const addNewTaskButton = document.querySelector('main');
 const createNewProjectButton = document.querySelector('#createProject');
 const addNewProjectButton = document.querySelector('nav');
 const projectListListener = document.querySelector('#projectsList');
+const cardButtons = document.querySelector('#tasksContainer');
 
-createNewTaskButton.addEventListener('click', () => View.displayForm('formContainer', 'form', Builder.form));
-addNewTaskButton.addEventListener('click', (e) => View.hideForm(e, 'addTask', 'form'));
+createNewTaskButton.addEventListener('click', () => View.displayForm('formContainer', 'form', Builder.taskForm));
+addNewTaskButton.addEventListener('click', (e) => { Helper.addNewTask(e, projectsArray); });
 createNewProjectButton.addEventListener('click', () => View.displayForm('projectFormContainer', 'projectForm', Builder.projectForm));
 addNewProjectButton.addEventListener('click', (e) => Helper.addNewProject(e, projectsArray));
 projectListListener.addEventListener('click', (e) => View.updateTasks(e, projectsArray));
+cardButtons.addEventListener('click', (e) => { Helper.deleteTask(e, projectsArray); });
+cardButtons.addEventListener('click', (e) => { View.toggleDone(e); });
