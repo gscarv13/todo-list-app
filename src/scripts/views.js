@@ -31,7 +31,7 @@ const displayTask = (task) => {
 
 const displayAllTasks = (project) => {
   for (let i = 0; i < project.taskList.length; i += 1) {
-    const task = Builder.task(project.taskList[i]);
+    const task = Builder.task(project.taskList[i], project.taskList);
     displayTask(task);
   }
 };
@@ -51,12 +51,22 @@ const reload = (container, items, builder) => {
 const updateTasks = (e, array) => {
   const index = e.target.parentElement.getAttribute('data-index');
   const container = document.querySelector('#tasksContainer');
+  localStorage.setItem('projectIndex', index);
 
   deleteAll(container);
   displayAllTasks(array[index]);
 };
 
+const toggleDone = (e) => {
+  const card = e.target.parentElement.parentElement;
+
+  if (e.target.textContent === 'Done') {
+    card.classList.toggle('done');
+    card.classList.toggle('has-background-grey-light');
+  }
+};
+
 export {
   displayForm, hideForm, displayProjects, displayTask,
-  displayAllTasks, deleteAll, updateTasks, reload,
+  displayAllTasks, deleteAll, updateTasks, reload, toggleDone,
 };

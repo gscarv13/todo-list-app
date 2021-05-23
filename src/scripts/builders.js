@@ -2,7 +2,7 @@ const top = () => {
   const wrapper = document.createElement('div');
   const h1 = document.createElement('h1');
 
-  wrapper.classList.add('top');
+  wrapper.classList.add('top', 'has-background-primary', 'container');
   h1.classList.add('is-size-5');
   h1.textContent = 'To-do';
 
@@ -12,7 +12,7 @@ const top = () => {
 
 const container = () => {
   const wrapper = document.createElement('div');
-  wrapper.classList.add('container');
+  wrapper.classList.add('container', 'container-height');
   return wrapper;
 };
 
@@ -23,6 +23,7 @@ const navigation = () => {
   const addProjectButton = document.createElement('button');
   const formContainer = document.createElement('div');
 
+  nav.classList.add('box', 'border');
   h2.textContent = 'Projects';
 
   formContainer.id = 'projectFormContainer';
@@ -66,7 +67,7 @@ const main = () => {
   return main;
 };
 
-const form = () => {
+const taskForm = () => {
   const form = document.createElement('form');
   const titleLabel = document.createElement('label');
   const titleInput = document.createElement('input');
@@ -86,25 +87,25 @@ const form = () => {
   form.classList.add('mt-5', 'box');
 
   titleLabel.setAttribute('for', 'title');
-  titleLabel.textContent = 'Title';
+  titleLabel.textContent = 'Title:';
   titleInput.id = 'title';
   titleInput.setAttribute('type', 'text');
   titleInput.classList.add('field', 'input');
 
   dateLabel.setAttribute('for', 'date');
-  dateLabel.textContent = 'Date';
+  dateLabel.textContent = 'Due date:';
   dateInput.id = 'date';
   dateInput.setAttribute('type', 'date');
   dateInput.classList.add('field', 'input');
 
   descriptionLabel.setAttribute('for', 'description');
-  descriptionLabel.textContent = 'Description';
+  descriptionLabel.textContent = 'Description:';
   descriptionInput.id = 'description';
   descriptionInput.setAttribute('type', 'text');
   descriptionInput.classList.add('field', 'input');
 
   priorityLabel.setAttribute('for', 'priority');
-  priorityLabel.textContent = 'Priority';
+  priorityLabel.textContent = 'Priority:';
   prioritySelect.id = 'priority';
   prioritySelect.classList.add('input', 'field');
 
@@ -152,8 +153,9 @@ const projectLink = (project, projectsArray) => {
   return linkContainer;
 };
 
-const task = (task) => {
+const task = (task, project) => {
   const card = document.createElement('div');
+  const index = project.indexOf(task);
   const cardHeader = document.createElement('div');
   const taskTitle = document.createElement('p');
   const contentWrapper = document.createElement('div');
@@ -166,7 +168,7 @@ const task = (task) => {
   const doneOption = document.createElement('a');
 
   card.classList.add('card');
-  // card.setAttribute('data-attribute', );
+  card.setAttribute('data-attribute', index);
 
   cardHeader.classList.add('card-header');
   taskTitle.classList.add('card-header-title');
@@ -203,7 +205,7 @@ const projectForm = () => {
   const form = document.createElement('form');
   const label = document.createElement('label');
   const input = document.createElement('input');
-  const button = document.createElement('button');
+  const button = document.createElement('a');
 
   form.classList.add('mt-5', 'box');
   form.id = 'projectForm';
@@ -212,6 +214,7 @@ const projectForm = () => {
   label.textContent = 'New project';
 
   input.classList.add('input');
+  input.id = 'projectTitle';
   input.type = 'text';
 
   button.classList.add('button', 'mt-5');
@@ -223,5 +226,5 @@ const projectForm = () => {
 };
 
 export {
-  top, container, navigation, main, form, fullPage, projectLink, task, projectForm,
+  top, container, navigation, main, taskForm, fullPage, projectLink, task, projectForm,
 };

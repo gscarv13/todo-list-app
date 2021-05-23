@@ -11,12 +11,11 @@
 .top {
   height : 10%;
   padding: 10px;
-  background-color: grey;
   max-width: 1152px;
   margin: 0 auto;
 }
 
-.container {
+.container-height {
   display: flex;
   flex-direction: row;
   height: 90%;
@@ -28,7 +27,6 @@ nav {
   display: flex;
   height: 100%;
   flex-direction: column;
-  background-color: gainsboro;
 }
 
 main {
@@ -43,4 +41,18 @@ main {
 
 .card {
   width: 250px;
+  overflow-wrap: break-word;
 }
+
+.card-header-title, .card-header {
+  inline-size: 250px;
+  overflow-wrap: break-word;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+/*
+  has-background-grey-light;
+*/
