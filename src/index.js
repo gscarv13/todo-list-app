@@ -14,7 +14,9 @@ const projectsArray = [];
 Builder.fullPage();
 projectsArray.push(new Project('Default'));
 
-projectsArray[0].addTask(new Task('Take out trash', '', '31/12/2030', 'Low'));
+projectsArray[0].addTask(new Task('Take out trash', 'Do it after lunch', '31/12/2030', 'High'));
+projectsArray[0].addTask(new Task('Check TypeScript', 'Set up an initial project', '31/12/2030', 'High'));
+projectsArray[0].addTask(new Task('Study HTTP/TCP protocol', 'Difference between TCP and UDP', '31/12/2030', 'High'));
 View.displayAllTasks(projectsArray[0]);
 View.displayProjects(projectsArray);
 
