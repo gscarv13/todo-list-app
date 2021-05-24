@@ -10,7 +10,7 @@ const taskCreator = () => {
   const priority = document.querySelector('#priority');
   let task = null;
 
-  if (title.value !== '' && description.value !== '' && dueDate.value !== '') {
+  if (title.value !== '') {
     task = new Task(title.value, description.value, dueDate.value, priority.value);
   }
   return task;
@@ -35,10 +35,8 @@ const addNewProject = (e, projectsArray) => {
 
 const addNewTask = (e, projectsArray) => {
   const title = document.querySelector('#title');
-  const description = document.querySelector('#description');
-  const date = document.querySelector('#date');
 
-  if (e.target.id === 'addTask' && title.value !== '' && description.value !== '' && date.value !== '') {
+  if (e.target.id === 'addTask' && title.value !== '') {
     const task = taskCreator();
     const container = document.querySelector('#tasksContainer');
     const index = JSON.parse(localStorage.getItem('projectIndex'));

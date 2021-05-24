@@ -49,12 +49,14 @@ const reload = (container, items, builder) => {
 };
 
 const updateTasks = (e, array) => {
-  const index = e.target.parentElement.getAttribute('data-index');
-  const container = document.querySelector('#tasksContainer');
-  localStorage.setItem('projectIndex', index);
+  if (e.target.parentElement.getAttribute('data-index') !== null) {
+    const index = e.target.parentElement.getAttribute('data-index');
+    const container = document.querySelector('#tasksContainer');
+    localStorage.setItem('projectIndex', index);
 
-  deleteAll(container);
-  displayAllTasks(array[index]);
+    deleteAll(container);
+    displayAllTasks(array[index]);
+  }
 };
 
 const toggleDone = (e) => {

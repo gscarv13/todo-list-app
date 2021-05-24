@@ -89,12 +89,14 @@ const taskForm = () => {
   titleLabel.setAttribute('for', 'title');
   titleLabel.textContent = 'Title:';
   titleInput.id = 'title';
+  titleInput.required = true;
   titleInput.setAttribute('type', 'text');
   titleInput.classList.add('field', 'input');
 
   dateLabel.setAttribute('for', 'date');
   dateLabel.textContent = 'Due date:';
   dateInput.id = 'date';
+  dateInput.required = true;
   dateInput.setAttribute('type', 'date');
   dateInput.classList.add('field', 'input');
 
@@ -215,6 +217,7 @@ const projectForm = () => {
 
   input.classList.add('input');
   input.id = 'projectTitle';
+  input.required = true;
   input.type = 'text';
 
   button.classList.add('button', 'mt-5');
