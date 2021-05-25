@@ -163,12 +163,18 @@ const projectLink = (project, projectsArray) => {
 
 const priorityBg = (priority) => {
   let bg = null;
-  if (priority === 'Low') {
-    bg = 'has-background-info-light';
-  } else if (priority === 'Medium') {
-    bg = 'has-background-warning-light';
-  } else {
-    bg = 'has-background-danger-light';
+  switch (priority) {
+    case 'Low':
+      bg = 'has-background-info-light';
+      break;
+    case 'Medium':
+      bg = 'has-background-warning-light';
+      break;
+    case 'High':
+      bg = 'has-background-danger-light';
+      break;
+    default:
+      bg = null;
   }
   return bg;
 };

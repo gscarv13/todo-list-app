@@ -33,18 +33,30 @@ const addNewProject = (e, projectsArray) => {
   }
 };
 
+const validateField = (field) => {
+  if (field.value === '') {
+    field.classList.add('is-danger');
+  }
+};
+
 const addNewTask = (e, projectsArray) => {
   const title = document.querySelector('#title');
+  const date = document.querySelector('#date');
 
-  if (e.target.id === 'addTask' && title.value !== '') {
-    const task = taskCreator();
-    const container = document.querySelector('#tasksContainer');
-    const index = JSON.parse(localStorage.getItem('projectIndex'));
-    const project = projectsArray[index];
-    project.addTask(task);
-    View.deleteAll(container);
-    View.displayAllTasks(project);
-    View.hideForm(e, 'addTask', 'form');
+  if (e.target.id === 'addTask') {
+    if (title.value !== '' && date.value !== '') {
+      const task = taskCreator();
+      const container = document.querySelector('#tasksContainer');
+      const index = JSON.parse(localStorage.getItem('projectIndex'));
+      const project = projectsArray[index];
+      project.addTask(task);
+      View.deleteAll(container);
+      View.displayAllTasks(project);
+      View.hideForm(e, 'addTask', 'form');
+    } else {
+      validateField(title);
+      validateField(date);
+    }
   }
 };
 
