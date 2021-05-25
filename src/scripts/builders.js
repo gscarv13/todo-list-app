@@ -155,17 +155,36 @@ const projectLink = (project, projectsArray) => {
   return linkContainer;
 };
 
+const priorityBg = (priority) => {
+  let bg = null;
+  if (priority === 'Low') {
+    bg = 'has-background-info-light';
+  } else if (priority === 'Medium') {
+    bg = 'has-background-warning-light';
+  } else {
+    bg = 'has-background-danger-light';
+  }
+  return bg;
+};
+
 const task = (task, project) => {
   const card = document.createElement('div');
   const index = project.indexOf(task);
   const cardHeader = document.createElement('div');
-  const taskTitle = document.createElement('p');
+  const taskTitle = document.createElement('div');
+  const buttonContainer = document.createElement('div');
+  const doneButton = document.createElement('a');
+  const doneButtonSpan = document.createElement('span');
+  const doneIcon = document.createElement('i');
+  const detailsButton = document.createElement('a');
+  const detailsButtonSpan = document.createElement('span');
+  const detailsIcon = document.createElement('i');
   const contentWrapper = document.createElement('div');
   const contentContainer = document.createElement('div');
   const description = document.createElement('p');
   const date = document.createElement('p');
   const cardFooter = document.createElement('div');
-  const priority = document.createElement('a');
+  const priority = document.createElement('span');
   const deleteOption = document.createElement('a');
   const doneOption = document.createElement('a');
 
@@ -173,11 +192,22 @@ const task = (task, project) => {
   card.setAttribute('data-attribute', index);
 
   cardHeader.classList.add('card-header');
-  taskTitle.classList.add('card-header-title');
+  taskTitle.classList.add('card-header-title', 'is-block');
   taskTitle.id = 'taskTitle';
   taskTitle.textContent = task.title;
 
-  contentWrapper.classList.add('card-content');
+  buttonContainer.classList.add('is-flex', 'is-flex-direction-column', 'is-justify-content-space-between');
+  doneButton.classList.add('card-header-icon');
+  doneButton.id = 'done';
+  doneButtonSpan.classList.add('icon');
+  doneIcon.classList.add('fas', 'fa-check-circle');
+
+  detailsButton.classList.add('card-header-icon');
+  detailsButtonSpan.classList.add('icon');
+  detailsButton.id = 'displayDetails';
+  detailsIcon.classList.add('fas', 'fa-angle-down');
+
+  contentWrapper.classList.add('card-content', 'hidden');
   contentContainer.classList.add('content');
   description.id = 'description';
   description.textContent = task.description;
@@ -191,10 +221,17 @@ const task = (task, project) => {
   doneOption.classList.add('card-footer-item');
   doneOption.href = '#';
   doneOption.textContent = 'Done';
-  priority.classList.add('card-footer-item');
+  priority.classList.add('card-footer-item', priorityBg(task.priority));
   priority.textContent = task.priority;
 
-  cardHeader.append(taskTitle);
+  doneButtonSpan.append(doneIcon);
+  doneButton.append(doneButtonSpan);
+
+  detailsButtonSpan.append(detailsIcon);
+  detailsButton.append(detailsButtonSpan);
+  buttonContainer.append(doneButton, detailsButton);
+
+  cardHeader.append(taskTitle, buttonContainer);
   contentContainer.append(description, date);
   contentWrapper.append(contentContainer);
   cardFooter.append(doneOption, deleteOption, priority);

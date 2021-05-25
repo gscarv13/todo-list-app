@@ -13,6 +13,7 @@ const projectsArray = [];
 // build the initial HTML
 Builder.fullPage();
 projectsArray.push(new Project('Default'));
+localStorage.setItem('projectIndex', 0);
 
 projectsArray[0].addTask(new Task('Take out trash', 'Do it after lunch', '31/12/2030', 'High'));
 projectsArray[0].addTask(new Task('Check TypeScript', 'Set up an initial project', '31/12/2030', 'High'));
@@ -35,3 +36,4 @@ addNewProjectButton.addEventListener('click', (e) => Helper.addNewProject(e, pro
 projectListListener.addEventListener('click', (e) => View.updateTasks(e, projectsArray));
 cardButtons.addEventListener('click', (e) => { Helper.deleteTask(e, projectsArray); });
 cardButtons.addEventListener('click', (e) => { View.toggleDone(e); });
+cardButtons.addEventListener('click', (e) => { View.toggleDescription(e); });

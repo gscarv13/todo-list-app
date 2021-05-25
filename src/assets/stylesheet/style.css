@@ -42,6 +42,7 @@ main {
 .card {
   width: 250px;
   overflow-wrap: break-word;
+  height: 100%;
 }
 
 .card-header-title,
@@ -50,6 +51,23 @@ main {
   overflow-wrap: break-word;
 }
 
+.card-header-title {
+  overflow: overlay;
+}
+
 .done {
   text-decoration: line-through;
+}
+
+.card-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-top {
+  box-shadow: 0 0.125em 0.25em rgb(10 10 10 / 10%);
+}
+
+.hidden {
+  display: none;
 }

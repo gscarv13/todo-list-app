@@ -60,15 +60,22 @@ const updateTasks = (e, array) => {
 };
 
 const toggleDone = (e) => {
-  const card = e.target.parentElement.parentElement;
-
-  if (e.target.textContent === 'Done') {
+  if (e.target.parentElement.parentElement.id === 'done') {
+    const card = e.target.parentElement.parentElement.parentElement.parentElement.parentElement;
     card.classList.toggle('done');
     card.classList.toggle('has-background-grey-light');
+  }
+};
+
+const toggleDescription = (e) => {
+  if (e.target.parentElement.parentElement.id === 'displayDetails') {
+    const card = e.target.parentElement.parentElement.parentElement.parentElement.parentElement;
+    card.childNodes[1].classList.toggle('hidden');
   }
 };
 
 export {
   displayForm, hideForm, displayProjects, displayTask,
   displayAllTasks, deleteAll, updateTasks, reload, toggleDone,
+  toggleDescription,
 };
