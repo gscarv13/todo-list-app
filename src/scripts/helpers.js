@@ -60,4 +60,46 @@ const deleteTask = (e, projectsArray) => {
   }
 };
 
-export { addNewProject, addNewTask, deleteTask };
+const updateDate = (e, projectsArray) => {
+  if (e.target.id === 'date') {
+    const date = e.target.value;
+    const index = e.target.parentElement.parentElement.parentElement.getAttribute('data-attribute');
+    const project = projectsArray[JSON.parse(localStorage.getItem('projectIndex'))];
+    project.taskList[index].dueDate = date;
+  }
+};
+
+const updateDescription = (e, projectsArray) => {
+  if (e.target.id === 'description') {
+    const description = e.target.value;
+    const index = e.target.parentElement.parentElement.parentElement.getAttribute('data-attribute');
+    const project = projectsArray[JSON.parse(localStorage.getItem('projectIndex'))];
+    project.taskList[index].description = description;
+  }
+};
+
+const updateTitle = (e, projectsArray) => {
+  if (e.target.id === 'taskTitle') {
+    const title = e.target.value;
+    const index = e.target.parentElement.parentElement.getAttribute('data-attribute');
+    const project = projectsArray[JSON.parse(localStorage.getItem('projectIndex'))];
+    project.taskList[index].title = title;
+  }
+};
+
+const updatePriority = (e, projectsArray) => {
+  if (e.target.id === 'priority') {
+    const classes = e.target.classList;
+    const priority = e.target.value;
+    const index = e.target.parentElement.parentElement.getAttribute('data-attribute');
+    const project = projectsArray[JSON.parse(localStorage.getItem('projectIndex'))];
+
+    classes.replace(classes[classes.length - 1], Builder.priorityBg(e.target.value));
+    project.taskList[index].priority = priority;
+  }
+};
+
+export {
+  addNewProject, addNewTask, deleteTask, updateDate, updateDescription, updateTitle,
+  updatePriority,
+};

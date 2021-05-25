@@ -67,6 +67,26 @@ const main = () => {
   return main;
 };
 
+const options = () => {
+  const prioritySelect = document.createElement('select');
+  const op1 = document.createElement('option');
+  const op2 = document.createElement('option');
+  const op3 = document.createElement('option');
+
+  prioritySelect.id = 'priority';
+  prioritySelect.classList.add('input', 'field');
+
+  op1.setAttribute('value', 'Low');
+  op1.textContent = 'Low';
+  op2.setAttribute('value', 'Medium');
+  op2.textContent = 'Medium';
+  op3.setAttribute('value', 'High');
+  op3.textContent = 'High';
+
+  prioritySelect.append(op1, op2, op3);
+  return prioritySelect;
+};
+
 const taskForm = () => {
   const form = document.createElement('form');
   const titleLabel = document.createElement('label');
@@ -76,10 +96,7 @@ const taskForm = () => {
   const descriptionLabel = document.createElement('label');
   const descriptionInput = document.createElement('input');
   const priorityLabel = document.createElement('label');
-  const prioritySelect = document.createElement('select');
-  const op1 = document.createElement('option');
-  const op2 = document.createElement('option');
-  const op3 = document.createElement('option');
+  const prioritySelect = options();
   const br = document.createElement('br');
   const submit = document.createElement('a');
 
@@ -108,21 +125,10 @@ const taskForm = () => {
 
   priorityLabel.setAttribute('for', 'priority');
   priorityLabel.textContent = 'Priority:';
-  prioritySelect.id = 'priority';
-  prioritySelect.classList.add('input', 'field');
-
-  op1.setAttribute('value', 'low');
-  op1.textContent = 'Low';
-  op2.setAttribute('value', 'medium');
-  op2.textContent = 'Medium';
-  op3.setAttribute('value', 'high');
-  op3.textContent = 'High';
 
   submit.classList.add('button', 'is-primary', 'is-small', 'has-text-dark', 'mt-5');
   submit.id = 'addTask';
   submit.textContent = 'Add Task';
-
-  prioritySelect.append(op1, op2, op3);
 
   form.append(
     titleLabel, titleInput, dateLabel,
@@ -171,7 +177,7 @@ const task = (task, project) => {
   const card = document.createElement('div');
   const index = project.indexOf(task);
   const cardHeader = document.createElement('div');
-  const taskTitle = document.createElement('div');
+  const taskTitle = document.createElement('input');
   const buttonContainer = document.createElement('div');
   const doneButton = document.createElement('a');
   const doneButtonSpan = document.createElement('span');
@@ -181,20 +187,20 @@ const task = (task, project) => {
   const detailsIcon = document.createElement('i');
   const contentWrapper = document.createElement('div');
   const contentContainer = document.createElement('div');
-  const description = document.createElement('p');
-  const date = document.createElement('p');
+  const description = document.createElement('textarea');
+  const date = document.createElement('input');
   const cardFooter = document.createElement('div');
-  const priority = document.createElement('span');
+  const priority = options();
   const deleteOption = document.createElement('a');
-  const doneOption = document.createElement('a');
+  const editOption = document.createElement('a');
 
   card.classList.add('card');
   card.setAttribute('data-attribute', index);
 
   cardHeader.classList.add('card-header');
-  taskTitle.classList.add('card-header-title', 'is-block');
+  taskTitle.classList.add('card-header-title');
   taskTitle.id = 'taskTitle';
-  taskTitle.textContent = task.title;
+  taskTitle.value = task.title;
 
   buttonContainer.classList.add('is-flex', 'is-flex-direction-column', 'is-justify-content-space-between');
   doneButton.classList.add('card-header-icon');
@@ -210,19 +216,22 @@ const task = (task, project) => {
   contentWrapper.classList.add('card-content', 'hidden');
   contentContainer.classList.add('content');
   description.id = 'description';
-  description.textContent = task.description;
+  description.classList.add('textarea');
+  description.value = task.description;
   date.id = 'date';
-  date.textContent = task.dueDate;
+  date.setAttribute('value', task.dueDate.replaceAll('/', '-'));
+  date.setAttribute('type', 'date');
+  date.classList.add('input');
 
   cardFooter.classList.add('card-footer');
   deleteOption.classList.add('card-footer-item');
   deleteOption.href = '#';
   deleteOption.textContent = 'Delete';
-  doneOption.classList.add('card-footer-item');
-  doneOption.href = '#';
-  doneOption.textContent = 'Done';
+  editOption.classList.add('card-footer-item');
+  editOption.href = '#';
+  editOption.textContent = 'Edit';
   priority.classList.add('card-footer-item', priorityBg(task.priority));
-  priority.textContent = task.priority;
+  priority.value = task.priority;
 
   doneButtonSpan.append(doneIcon);
   doneButton.append(doneButtonSpan);
@@ -234,7 +243,7 @@ const task = (task, project) => {
   cardHeader.append(taskTitle, buttonContainer);
   contentContainer.append(description, date);
   contentWrapper.append(contentContainer);
-  cardFooter.append(doneOption, deleteOption, priority);
+  cardFooter.append(editOption, deleteOption, priority);
   card.append(cardHeader, contentWrapper, cardFooter);
 
   return card;
@@ -266,5 +275,5 @@ const projectForm = () => {
 };
 
 export {
-  top, container, navigation, main, taskForm, fullPage, projectLink, task, projectForm,
+  top, container, navigation, main, taskForm, fullPage, projectLink, task, projectForm, priorityBg,
 };
