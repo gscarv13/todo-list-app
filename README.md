@@ -2,7 +2,7 @@
 
 > This project is a To-Do app built with webpack and javascript ES6 modules
 
-![](demo/demo.png)
+![](demo/demo1.png)
 
 ## Built With
 
