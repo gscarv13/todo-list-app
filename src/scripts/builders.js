@@ -198,7 +198,6 @@ const task = (task, project) => {
   const cardFooter = document.createElement('div');
   const priority = options();
   const deleteOption = document.createElement('a');
-  const editOption = document.createElement('a');
 
   card.classList.add('card');
   card.setAttribute('data-attribute', index);
@@ -233,9 +232,6 @@ const task = (task, project) => {
   deleteOption.classList.add('card-footer-item');
   deleteOption.href = '#';
   deleteOption.textContent = 'Delete';
-  editOption.classList.add('card-footer-item');
-  editOption.href = '#';
-  editOption.textContent = 'Edit';
   priority.classList.add('card-footer-item', priorityBg(task.priority));
   priority.value = task.priority;
 
@@ -249,7 +245,7 @@ const task = (task, project) => {
   cardHeader.append(taskTitle, buttonContainer);
   contentContainer.append(description, date);
   contentWrapper.append(contentContainer);
-  cardFooter.append(editOption, deleteOption, priority);
+  cardFooter.append(deleteOption, priority);
   card.append(cardHeader, contentWrapper, cardFooter);
 
   return card;
