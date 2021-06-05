@@ -1,4 +1,4 @@
-# Javascript Library
+# To-do App
 
 > This project is a To-Do app built with webpack and javascript ES6 modules
 
