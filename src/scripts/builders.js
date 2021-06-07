@@ -277,5 +277,6 @@ const projectForm = () => {
 };
 
 export {
-  top, container, navigation, main, taskForm, fullPage, projectLink, task, projectForm, priorityBg,
+  top, container, navigation, main, taskForm, fullPage, projectLink, task,
+  projectForm, priorityBg, options,
 };
