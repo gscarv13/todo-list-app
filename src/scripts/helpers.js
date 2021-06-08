@@ -18,7 +18,12 @@ const taskCreator = () => {
 
 const projectCreator = () => {
   const title = document.querySelector('#projectTitle');
-  return new Project(title.value);
+  let project = null;
+
+  if (title.value !== '') {
+    project = new Project(title.value);
+  }
+  return project;
 };
 
 const addNewProject = (e, projectsArray) => {
@@ -113,5 +118,5 @@ const updatePriority = (e, projectsArray) => {
 
 export {
   addNewProject, addNewTask, deleteTask, updateDate, updateDescription, updateTitle,
-  updatePriority,
+  updatePriority, taskCreator, projectCreator, validateField,
 };
