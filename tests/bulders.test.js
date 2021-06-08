@@ -95,4 +95,12 @@ describe('Priority background color', () => {
   test('should css class if priority is valid', () => {
     expect(builder.priorityBg('High')).toBe('has-background-danger-light');
   });
+
+  test('should css class if priority is valid', () => {
+    expect(builder.priorityBg('Medium')).toBe('has-background-warning-light');
+  });
+
+  test('should css class if priority is valid', () => {
+    expect(builder.priorityBg('Low')).toBe('has-background-info-light');
+  });
 });
