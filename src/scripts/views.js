@@ -24,15 +24,14 @@ const displayProjects = (projects) => {
   }
 };
 
-const displayTask = (task) => {
-  const main = document.querySelector('#tasksContainer');
-  main.append(task);
+const displayTask = (task, container) => {
+  container.append(task);
 };
 
-const displayAllTasks = (project) => {
+const displayAllTasks = (project, taskContainer) => {
   for (let i = 0; i < project.taskList.length; i += 1) {
     const task = Builder.task(project.taskList[i], project.taskList);
-    displayTask(task);
+    displayTask(task, taskContainer);
   }
 };
 
@@ -48,10 +47,9 @@ const reload = (container, items, builder) => {
   }
 };
 
-const updateTasks = (e, array) => {
+const updateTasks = (e, array, container) => {
   if (e.target.parentElement.getAttribute('data-index') !== null) {
     const index = e.target.parentElement.getAttribute('data-index');
-    const container = document.querySelector('#tasksContainer');
     localStorage.setItem('projectIndex', index);
 
     deleteAll(container);

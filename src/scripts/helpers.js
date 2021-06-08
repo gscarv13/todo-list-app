@@ -39,7 +39,7 @@ const validateField = (field) => {
   }
 };
 
-const addNewTask = (e, projectsArray) => {
+const addNewTask = (e, projectsArray, taskContainer) => {
   const title = document.querySelector('#title');
   const date = document.querySelector('#date');
 
@@ -51,7 +51,7 @@ const addNewTask = (e, projectsArray) => {
       const project = projectsArray[index];
       project.addTask(task);
       View.deleteAll(container);
-      View.displayAllTasks(project);
+      View.displayAllTasks(project, taskContainer);
       View.hideForm(e, 'addTask', 'form');
     } else {
       validateField(title);
@@ -68,7 +68,7 @@ const deleteTask = (e, projectsArray) => {
     const project = projectsArray[projectIndex];
     project.removeTask(taskIndex);
     View.deleteAll(tasksContainer);
-    View.displayAllTasks(project);
+    View.displayAllTasks(project, tasksContainer);
   }
 };
 
