@@ -1,5 +1,19 @@
 import * as builder from '../src/scripts/builders';
 
+// variables
+const dummyTask = {
+  title: 'Title',
+  description: 'description',
+  dueDate: '2000-12-31',
+  priority: 'low',
+};
+
+const dummyProject = {
+  taskList: [],
+};
+
+const dummyProjectsArray = [dummyProject];
+
 test('top() should return an HTMLDivElement', () => {
   const topContainer = builder.top();
   expect(topContainer instanceof HTMLDivElement);
@@ -26,17 +40,6 @@ test('options() should return an HTMLSelectElement', () => {
 });
 
 describe('HTML card task element', () => {
-  const dummyTask = {
-    title: 'Title',
-    description: 'description',
-    dueDate: '2000-12-31',
-    priority: 'low',
-  };
-
-  const dummyProject = {
-    taskList: [],
-  };
-
   test('task() should return an HTMLDivElement', () => {
     dummyProject.taskList.push(dummyTask);
 
@@ -56,4 +59,40 @@ describe('HTML card task element', () => {
 test('form() should return an HTMLFormElement', () => {
   const form = builder.projectForm();
   expect(form instanceof HTMLFormElement);
+});
+
+test('taskForm() should return an HTMLFormElement', () => {
+  const taskForm = builder.taskForm();
+  expect(taskForm instanceof HTMLFormElement);
+});
+
+test('fullPage() should return an HTMLSelectElement', () => {
+  document.body.innerHTML = '<div id="content"></div>';
+  const options = builder.fullPage();
+  expect(options instanceof HTMLSelectElement);
+});
+
+describe('Project links', () => {
+  test('projectLink() should be return an HTMLParagraphElement', () => {
+    const link = builder.projectLink(dummyProject, dummyProjectsArray);
+    expect(link instanceof HTMLParagraphElement).toBe(true);
+  });
+
+  test('projectLink() should throw an error if missing projectsArray', () => {
+    expect(() => builder.projectLink(dummyProject)).toThrow(Error);
+  });
+
+  test('projectLink() should throw an error if project', () => {
+    expect(() => builder.projectLink(dummyProjectsArray)).toThrow(Error);
+  });
+});
+
+describe('Priority background color', () => {
+  test('should return null if priority is invalid', () => {
+    expect(builder.priorityBg('invalid')).toBeNull();
+  });
+
+  test('should css class if priority is valid', () => {
+    expect(builder.priorityBg('High')).toBe('has-background-danger-light');
+  });
 });
