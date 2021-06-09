@@ -31,7 +31,7 @@ const projectListListener = document.querySelector('#projectsList');
 const cardElements = document.querySelector('#tasksContainer');
 
 createNewTaskButton.addEventListener('click', () => View.displayForm('formContainer', 'form', Builder.taskForm));
-addNewTaskButton.addEventListener('click', (e) => { Helper.addNewTask(e, projectsArray, tasksContainer); });
+addNewTaskButton.addEventListener('click', (e) => { Helper.addNewTask(e, projectsArray); });
 createNewProjectButton.addEventListener('click', () => View.displayForm('projectFormContainer', 'projectForm', Builder.projectForm));
 addNewProjectButton.addEventListener('click', (e) => Helper.addNewProject(e, projectsArray));
 projectListListener.addEventListener('click', (e) => View.updateTasks(e, projectsArray, tasksContainer));

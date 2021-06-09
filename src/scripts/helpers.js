@@ -44,7 +44,7 @@ const validateField = (field) => {
   }
 };
 
-const addNewTask = (e, projectsArray, taskContainer) => {
+const addNewTask = (e, projectsArray) => {
   const title = document.querySelector('#title');
   const date = document.querySelector('#date');
 
@@ -56,7 +56,7 @@ const addNewTask = (e, projectsArray, taskContainer) => {
       const project = projectsArray[index];
       project.addTask(task);
       View.deleteAll(container);
-      View.displayAllTasks(project, taskContainer);
+      View.displayAllTasks(project, container);
       View.hideForm(e, 'addTask', 'form');
     } else {
       validateField(title);
