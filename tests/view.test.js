@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom';
 import * as view from '../src/scripts/views';
 import Project from '../src/scripts/projectClass';
 import Task from '../src/scripts/taskClass';
@@ -151,14 +152,14 @@ describe('toggleDone()', () => {
 
   test('should add done and has-background-grey-light classes', () => {
     view.toggleDone(ev);
-    expect(card.classList.contains('done')).toBe(true);
-    expect(card.classList.contains('has-background-grey-light')).toBe(true);
+    expect(card).toHaveClass('done');
+    expect(card).toHaveClass('has-background-grey-light');
   });
 
   test('should remove done and has-background-grey-light classes', () => {
     view.toggleDone(ev);
-    expect(card.classList.contains('done')).toBe(false);
-    expect(card.classList.contains('has-background-grey-light')).toBe(false);
+    expect(card).not.toHaveClass('done');
+    expect(card).not.toHaveClass('has-background-grey-light');
   });
 });
 
@@ -188,11 +189,11 @@ describe('toggleDescription()', () => {
 
   test('should add hidden class', () => {
     view.toggleDescription(ev);
-    expect(cardDescription.classList.contains('hidden')).toBe(true);
+    expect(cardDescription).toHaveClass('hidden');
   });
 
   test('should remove hidden class', () => {
     view.toggleDescription(ev);
-    expect(cardDescription.classList.contains('hidden')).toBe(false);
+    expect(cardDescription).not.toHaveClass('hidden');
   });
 });
