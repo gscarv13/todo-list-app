@@ -18,7 +18,12 @@ const taskCreator = () => {
 
 const projectCreator = () => {
   const title = document.querySelector('#projectTitle');
-  return new Project(title.value);
+  let project = null;
+
+  if (title.value !== '') {
+    project = new Project(title.value);
+  }
+  return project;
 };
 
 const addNewProject = (e, projectsArray) => {
@@ -51,7 +56,7 @@ const addNewTask = (e, projectsArray) => {
       const project = projectsArray[index];
       project.addTask(task);
       View.deleteAll(container);
-      View.displayAllTasks(project);
+      View.displayAllTasks(project, container);
       View.hideForm(e, 'addTask', 'form');
     } else {
       validateField(title);
@@ -68,7 +73,7 @@ const deleteTask = (e, projectsArray) => {
     const project = projectsArray[projectIndex];
     project.removeTask(taskIndex);
     View.deleteAll(tasksContainer);
-    View.displayAllTasks(project);
+    View.displayAllTasks(project, tasksContainer);
   }
 };
 
@@ -113,5 +118,5 @@ const updatePriority = (e, projectsArray) => {
 
 export {
   addNewProject, addNewTask, deleteTask, updateDate, updateDescription, updateTitle,
-  updatePriority,
+  updatePriority, taskCreator, projectCreator, validateField,
 };

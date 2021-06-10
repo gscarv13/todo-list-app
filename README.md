@@ -14,6 +14,7 @@
 - Stylelint
 - Webpack
 - yarn
+- Jest
 
 ## Getting Started
 
@@ -26,13 +27,20 @@ To run this project locally, make sure you have the following installed:
 
 - Clone this repository using the link above (click on the 'code' button)
 - Open a terminal and `cd` to the cloned repository
-- Run `yarn` to set up all dependencies
+- Run `yarn install` to set up all dependencies
 - Run `yarn build` to bundle all scripts
 
 ### Usage
 
 - `cd` into `dist/` and open `index.html`
 - Open the `index.html` file with your browser
+
+### Running tests
+
+To run the tests you need to first install all dependencies following Setup and Install section above.
+
+After that:
+- Run the command `yarn test` on the root directory to run all tests
 
 ## Authors
 

@@ -224,7 +224,7 @@ const task = (task, project) => {
   description.classList.add('textarea');
   description.value = task.description;
   date.id = 'date';
-  date.setAttribute('value', task.dueDate.replaceAll('/', '-'));
+  date.setAttribute('value', task.dueDate.replace(/\//, '-'));
   date.setAttribute('type', 'date');
   date.classList.add('input');
 
@@ -277,5 +277,6 @@ const projectForm = () => {
 };
 
 export {
-  top, container, navigation, main, taskForm, fullPage, projectLink, task, projectForm, priorityBg,
+  top, container, navigation, main, taskForm, fullPage, projectLink, task,
+  projectForm, priorityBg, options,
 };
